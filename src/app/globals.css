@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-green {
+        @apply bg-medium-sea-green-700 text-white hover:ring-1 hover:ring-medium-sea-green-300 px-5 py-2.5;
+    }
+
+    .input-border-b {
+        @apply py-2.5 px-5 pl-0 bg-transparent border-b outline-none text-white;
+    }
+}

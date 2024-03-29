@@ -1,60 +1,59 @@
 "use client"
-import Button from "@/src/components/Button";
-import {useState} from "react";
-import {createClient} from "../utils/supabase/client";
 
-const LicencePopup = ({onClose}) => {
+import React from "react";
+import {createClient} from "@/src/utils/supabase/client";
 
-  const [logiciel, setLogiciel] = useState<string>();
-  const [dateAchat, setDateAchat] = useState<Date>(new Date());
-  const [dateExpiration, setDateExpiration] = useState<Date>();
-  const [prix, setPrix] = useState<number>();
+const LicencePopup = ({onClose}: { onClose: any }) => {
 
-  const addLicence = async () => {
+  const addLicence = async (formData: FormData) => {
+
     const supabase = createClient();
     try {
       const {error} = await supabase.from("Licence").insert([{
-        logiciel: logiciel,
-        date_achat: dateAchat,
-        date_expiration: dateExpiration,
-        prix: prix,
+        logiciel: formData.get("logiciel"),
+        date_achat: new Date((formData.get("date_achat") as string).split("T")[0]),
+        date_expiration: new Date((formData.get("date_expiration") as string).split("T")[0]),
+        prix: Number(formData.get("prix")),
         responsable: 2
       }]);
 
       onClose();
     } catch (error) {
-      alert("testttt")
+      console.log(error);
     }
   }
 
   return (
-    <div className="bg-white bg-opacity-60 w-full h-full fixed top-0 flex justify-center items-center"
+    <div className="bg-white bg-opacity-65 w-full min-h-screen fixed top-0 flex justify-center items-center"
          onClick={onClose}>
-      <div className="bg-charcoal h-2/3 w-1/2" onClick={(event) => {
+      <div className="bg-charcoal w-1/3" onClick={(event) => {
         event.stopPropagation()
       }}>
-        <div className="flex justify-end items-center mb-6 p-6">
+        <div className="flex justify-end items-center p-6">
           <button type="button" onClick={onClose}>
             <svg viewBox="0 0 40 40" stroke="white" height={40}>
               <path d="M 10,10 L 30,30 M 30,10 L 10,30"/>
             </svg>
           </button>
         </div>
-        <div className="px-24">
+        <div className="p-16 pt-0">
           <span className="text-3xl text-white">Nouvelle licence</span>
-          <div className="flex flex-col justify-between mt-6">
-            <input required value={logiciel} onChange={(e) => {setLogiciel(e.target.value)}} name="logiciel" className="py-2.5 px-5 pl-0 bg-charcoal border-b outline-none text-white mb-4"
+          <form className="flex flex-col justify-between mt-12">
+            <input required name="logiciel"
+                   className="input-border-b mb-4"
                    placeholder="Logiciel"/>
-            <input value={dateAchat.toISOString().split('T')[0]} onChange={(e) => {setDateAchat(new Date(e.target.value))}} name="date_achat" className="py-2.5 px-5 pl-0 bg-charcoal border-b outline-none text-white mb-4"
+            <input required name="date_achat"
+                   className="input-border-b mb-4"
                    type="date"
                    placeholder="Date d'achat"/>
-            <input value={dateExpiration?.toISOString().split('T')[0]} onChange={(e) => {setDateExpiration(new Date(e.target.value))}} name="date_expiration" className="py-2.5 px-5 pl-0 bg-charcoal border-b outline-none text-white mb-4"
+            <input required name="date_expiration"
+                   className="input-border-b mb-4"
                    type="date"
                    placeholder="Date d'expiration"/>
-            <input value={prix} onChange={(e) => {setPrix(Number(e.target.value))}} name="prix" className="py-2.5 px-5 pl-0 bg-charcoal border-b outline-none text-white mb-4"
+            <input required name="prix" className="input-border-b mb-12"
                    placeholder="Prix"/>
-            <Button type="submit" onClick={addLicence}>Ajouter</Button>
-          </div>
+            <button className="btn-green" formMethod="post" type="submit" formAction={addLicence}>Ajouter</button>
+          </form>
         </div>
       </div>
     </div>
