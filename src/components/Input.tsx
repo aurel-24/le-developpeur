@@ -1,11 +1,8 @@
 "use client"
 
-import {ComponentProps, InputHTMLAttributes} from "react";
-import "../app/globals.css";
+import {ComponentProps} from "react";
 
-type Props = ComponentProps<"input">;
-
-const Input = ({...props}: InputHTMLAttributes<HTMLInputElement>) => {
+const Input = ({...props}: ComponentProps<"input">) => {
 
   return (
       <input

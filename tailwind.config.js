@@ -14,10 +14,11 @@ module.exports = {
         'oxford-blue': '#071F32',
         'charcoal': '#32465C',
         'placeholderGrey': '#9ca3af',
+        'background-opacity': "rbga(0, 0, 0, 0.75)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         btn: {
-          background: "hsl(var(--btn-background))",
+          background: "#FF0000",
           "background-hover": "hsl(var(--btn-background-hover))",
         },
       },

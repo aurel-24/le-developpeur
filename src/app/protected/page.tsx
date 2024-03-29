@@ -1,6 +1,7 @@
-import AuthButton from "@/src/components/AuthButton";
 import {createClient} from "@/src/utils/supabase/server";
 import {redirect} from "next/navigation";
+import LogoutButton from "@/src/components/LogoutButton";
+import PopupContainer from "@/src/components/PopupContainer";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -25,10 +26,8 @@ export default async function ProtectedPage() {
     <main className="flex min-h-screen bg-charcoal">
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
         <div className="w-full flex flex-col">
-          <nav className="w-full flex justify-center bg-medium-sea-green-700 text-white h-16">
-            <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-              <AuthButton/>
-            </div>
+          <nav className="w-full flex justify-end bg-medium-sea-green-700 text-white p-5">
+            <LogoutButton/>
           </nav>
           <table className="text-left text-white bg-oxford-blue m-24">
             <thead className="uppercase">
@@ -55,6 +54,7 @@ export default async function ProtectedPage() {
             }
             </tbody>
           </table>
+          <PopupContainer/>
         </div>
       </div>
     </main>
