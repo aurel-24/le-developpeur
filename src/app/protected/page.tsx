@@ -27,33 +27,35 @@ export default async function ProtectedPage() {
   }
 
   return (
-    <main className="flex min-h-screen bg-charcoal">
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <div className="w-full flex flex-col">
-          <nav className="w-full flex justify-end bg-medium-sea-green-700 text-white p-5">
-            <LogoutButton/>
-          </nav>
-          <table className="text-left text-white bg-oxford-blue m-24">
+    <main className="flex flex-col min-h-screen bg-white">
+      <nav className="w-full flex justify-end bg-medium-sea-green-700 text-white p-5">
+        <LogoutButton/>
+      </nav>
+      <div className="flex flex-col items-center">
+        <div className="w-3/4 flex flex-col my-16">
+          <table className="text-left text-white bg-oxford-blue mb-8">
             <thead className="uppercase">
             <tr className="bg-medium-sea-green-700">
-              <th className="p-6">Logiciel</th>
-              <th>Prix</th>
-              <th>Date d'achat</th>
-              <th>Date d'expiration</th>
-              <th>Durée de validité restante</th>
-              <th>Responsable</th>
+              <th className="py-6 px-4">Logiciel</th>
+              <th className="py-6 px-4">Prix</th>
+              <th className="py-6 px-4">Date d'achat</th>
+              <th className="py-6 px-4">Date d'expiration</th>
+              <th className="py-6 px-4">Durée de validité restante</th>
+              <th className="py-6 px-4">Responsable</th>
             </tr>
             </thead>
             <tbody>
             {
               licences.map((licence, index) => (
-                  <tr key={index} className="border-b border-gray-300 content-center">
+                  <tr key={index} className="even:bg-charcoal border-b border-gray-400 content-center">
                     <td className="p-4">{licence.logiciel}</td>
-                    <td>{licence.prix} €</td>
-                    <td>{licence.date_achat}</td>
-                    <td>{licence.date_expiration}</td>
-                    <td>{getTimeLeft(new Date(licence.date_achat), new Date(licence.date_expiration))} jours</td>
-                    <td>Abderrahmane</td>
+                    <td className="p-4">{licence.prix} €</td>
+                    <td className="p-4">{licence.date_achat}</td>
+                    <td className="p-4">{licence.date_expiration}</td>
+                    <td
+                      className="p-4">{getTimeLeft(new Date(licence.date_achat), new Date(licence.date_expiration))} jours
+                    </td>
+                    <td className="p-4">Abderrahmane</td>
                   </tr>
                 )
               )

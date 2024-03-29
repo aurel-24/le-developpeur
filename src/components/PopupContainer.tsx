@@ -15,7 +15,7 @@ const PopupContainer = () => {
     <div>
       <button
         onClick={togglePopupVisibility}
-        className="btn-green">
+        className="btn-green w-full">
         Ajouter une licence
       </button>
       {isPopupVisible ? <LicencePopup onClose={togglePopupVisibility}/> : null}

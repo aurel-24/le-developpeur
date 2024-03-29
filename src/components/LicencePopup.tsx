@@ -24,7 +24,7 @@ const LicencePopup = ({onClose}: { onClose: any }) => {
   }
 
   return (
-    <div className="bg-white bg-opacity-65 w-full min-h-screen fixed top-0 flex justify-center items-center"
+    <div className="bg-white bg-opacity-75 w-full min-h-screen fixed top-0 left-0 flex justify-center items-center"
          onClick={onClose}>
       <div className="bg-charcoal w-1/3" onClick={(event) => {
         event.stopPropagation()
@@ -38,20 +38,29 @@ const LicencePopup = ({onClose}: { onClose: any }) => {
         </div>
         <div className="p-16 pt-0">
           <span className="text-3xl text-white">Nouvelle licence</span>
-          <form className="flex flex-col justify-between mt-12">
+          <form className="flex flex-col justify-between mt-12 text-white">
+            <label htmlFor="logiciel" className="text-sm text-placeholderGrey">Nom du logiciel</label>
             <input required name="logiciel"
-                   className="input-border-b mb-4"
-                   placeholder="Logiciel"/>
+                   className="input-border-b mb-6"
+                   placeholder="SolidWorks"/>
+            <label htmlFor="prix" className="text-sm text-placeholderGrey">Coût</label>
+            <input required name="prix" className="input-border-b mb-6"
+                   placeholder="3500"/>
+            <label htmlFor="date_achat" className="text-sm text-placeholderGrey">Date d'achat</label>
             <input required name="date_achat"
-                   className="input-border-b mb-4"
+                   className="input-border-b mb-6"
                    type="date"
                    placeholder="Date d'achat"/>
+            <label htmlFor="date_expiration" className="text-sm text-placeholderGrey">Date d'expiration</label>
             <input required name="date_expiration"
-                   className="input-border-b mb-4"
+                   className="input-border-b mb-6"
                    type="date"
                    placeholder="Date d'expiration"/>
-            <input required name="prix" className="input-border-b mb-12"
-                   placeholder="Prix"/>
+            <label htmlFor="responsable" className="text-sm text-placeholderGrey">Responsable</label>
+            <select className="py-2.5 bg-transparent text-white mb-12 border-b" name="responsable">
+              <option>Abderrahmane</option>
+              <option>Aurélien</option>
+            </select>
             <button className="btn-green" formMethod="post" type="submit" formAction={addLicence}>Ajouter</button>
           </form>
         </div>
