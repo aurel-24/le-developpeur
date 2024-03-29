@@ -22,6 +22,10 @@ export default async function ProtectedPage() {
     return 0;
   }
 
+  const getTimeLeft = (dateAchat: Date, dateExpiration: Date) => {
+    return (dateExpiration.getTime() - dateAchat.getTime()) / (1000 * 60 * 60 * 24);
+  }
+
   return (
     <main className="flex min-h-screen bg-charcoal">
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
@@ -33,10 +37,11 @@ export default async function ProtectedPage() {
             <thead className="uppercase">
             <tr className="bg-medium-sea-green-700">
               <th className="p-6">Logiciel</th>
-              <th>Type de licence</th>
+              <th>Prix</th>
               <th>Date d'achat</th>
               <th>Date d'expiration</th>
-              <th>Prix</th>
+              <th>Durée de validité restante</th>
+              <th>Responsable</th>
             </tr>
             </thead>
             <tbody>
@@ -44,10 +49,11 @@ export default async function ProtectedPage() {
               licences.map((licence, index) => (
                   <tr key={index} className="border-b border-gray-300 content-center">
                     <td className="p-4">{licence.logiciel}</td>
-                    <td>{licence.type}</td>
+                    <td>{licence.prix} €</td>
                     <td>{licence.date_achat}</td>
                     <td>{licence.date_expiration}</td>
-                    <td>{licence.prix}</td>
+                    <td>{getTimeLeft(new Date(licence.date_achat), new Date(licence.date_expiration))} jours</td>
+                    <td>Abderrahmane</td>
                   </tr>
                 )
               )

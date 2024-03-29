@@ -6,7 +6,6 @@ import {createClient} from "../utils/supabase/client";
 const LicencePopup = ({onClose}) => {
 
   const [logiciel, setLogiciel] = useState<string>();
-  const [type, setType] = useState<string>();
   const [dateAchat, setDateAchat] = useState<Date>(new Date());
   const [dateExpiration, setDateExpiration] = useState<Date>();
   const [prix, setPrix] = useState<number>();
@@ -16,7 +15,6 @@ const LicencePopup = ({onClose}) => {
     try {
       const {error} = await supabase.from("Licence").insert([{
         logiciel: logiciel,
-        type: type,
         date_achat: dateAchat,
         date_expiration: dateExpiration,
         prix: prix,
@@ -47,8 +45,6 @@ const LicencePopup = ({onClose}) => {
           <div className="flex flex-col justify-between mt-6">
             <input required value={logiciel} onChange={(e) => {setLogiciel(e.target.value)}} name="logiciel" className="py-2.5 px-5 pl-0 bg-charcoal border-b outline-none text-white mb-4"
                    placeholder="Logiciel"/>
-            <input value={type} onChange={(e) => {setType(e.target.value)}} name="type" className="py-2.5 px-5 pl-0 bg-charcoal border-b outline-none text-white mb-4"
-                   placeholder="Type de licence"/>
             <input value={dateAchat.toISOString().split('T')[0]} onChange={(e) => {setDateAchat(new Date(e.target.value))}} name="date_achat" className="py-2.5 px-5 pl-0 bg-charcoal border-b outline-none text-white mb-4"
                    type="date"
                    placeholder="Date d'achat"/>
