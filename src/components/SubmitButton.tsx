@@ -15,7 +15,6 @@ const SubmitButton = ({children, pendingText, ...props}: Props) => {
   return (
     <button
       type="submit"
-      className="w-1/2 mx-auto border-2 border-medium-sea-green-700 hover:bg-medium-sea-green-700 px-5 py-2.5 text-white mb-2"
       aria-disabled={pending}
       {...props}>
       {isPending ? pendingText : children}

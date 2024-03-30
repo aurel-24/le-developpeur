@@ -3,18 +3,16 @@
 import {ComponentProps, useState} from "react";
 import "../app/globals.css";
 
-const PasswordInput = ({type, ...props}: ComponentProps<"input">) => {
+const PasswordInput = ({...props}: ComponentProps<"input">) => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordVisible(!isPasswordVisible);
   }
 
   return (
-    <div className="relative container mx-auto mt-4 w-1/2">
+    <div className="relative container">
       <input
         type={isPasswordVisible ? "text" : "password"}
-        required
-        className="bg-transparent border-b-2 w-full border-medium-sea-green-700 py-2.5 text-white outline-none"
         {...props}
       />
       <button className="absolute inset-y-0 right-0 flex items-center text-placeholderGrey"
