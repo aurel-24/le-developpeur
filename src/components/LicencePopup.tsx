@@ -1,9 +1,23 @@
 "use client"
 
-import React from "react";
+import React, {useEffect} from "react";
 import {createClient} from "@/src/utils/supabase/client";
 
 const LicencePopup = ({onClose}: { onClose: any }) => {
+
+  const fetchUsers = async () => {
+    const supabase = createClient();
+    try {
+      const {data, error} = await supabase.from("auth.users").select()
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  })
 
   const addLicence = async (formData: FormData) => {
 
@@ -14,7 +28,7 @@ const LicencePopup = ({onClose}: { onClose: any }) => {
         date_achat: new Date((formData.get("date_achat") as string).split("T")[0]),
         date_expiration: new Date((formData.get("date_expiration") as string).split("T")[0]),
         prix: Number(formData.get("prix")),
-        responsable: 2
+        responsable: "ad413ac9-760a-43fc-9a73-4538f68197d9"
       }]);
 
       onClose();
